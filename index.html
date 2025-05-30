@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexa - Stellar Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="theme-switcher">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="container">
+        <div class="ai-image">
+            <div class="ai-inner">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+        
+        <h1><span class="ai-name">Alexa</span> Stellar</h1>
+        <p class="subtitle">Помощник с искусственным интеллектом</p>
+        
+        <div class="input-group">
+            <input type="text" id="user-input" placeholder="Задайте ваш вопрос...">
+            <button id="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        
+        <div class="response-box">
+            <div id="ai-response">
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="examples">
+            <p>Попробуйте спросить: 
+                <span class="example">Привет</span>, 
+                <span class="example">Как тебя зовут?</span>, 
+                <span class="example">Сколько будет 8 + 5?</span>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
