@@ -45,6 +45,7 @@ body {
     color: var(--text-color);
     overflow: hidden;
     position: relative;
+    touch-action: manipulation;
 }
 
 .background-animation {
@@ -83,6 +84,7 @@ body {
     font-size: 20px;
     color: var(--accent-color);
     transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .theme-switcher:hover {
@@ -175,6 +177,7 @@ input {
     outline: none;
     color: var(--text-color);
     transition: all 0.3s ease;
+    min-height: 60px;
 }
 
 input:focus {
@@ -194,6 +197,7 @@ button#send-btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button#send-btn:hover {
@@ -246,6 +250,8 @@ button#send-btn:hover {
     border-radius: 5px;
     background: rgba(123, 44, 191, 0.1);
     transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
 }
 
 .example:hover {
@@ -281,24 +287,340 @@ button#send-btn:hover {
     40% { transform: scale(1); }
 }
 
-@media (max-width: 768px) {
+/* Большие мониторы (4K и выше) */
+@media (min-width: 1600px) {
     .container {
-        padding: 25px;
-        margin: 20px;
+        max-width: 900px;
+        padding: 60px;
     }
     
     .ai-image {
-        width: 120px;
-        height: 120px;
+        width: 180px;
+        height: 180px;
     }
     
     .ai-inner {
-        width: 90px;
-        height: 90px;
-        font-size: 36px;
+        width: 140px;
+        height: 140px;
+        font-size: 60px;
     }
     
     h1 {
-        font-size: 2rem;
+        font-size: 3rem;
+    }
+}
+
+/* Планшеты (портретный режим) */
+@media (max-width: 900px) {
+    .container {
+        padding: 30px;
+    }
+    
+    .ai-image {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .ai-inner {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    input {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    
+    button#send-btn {
+        padding: 0 30px;
+    }
+}
+
+/* Телефоны (ландшафтный режим) */
+@media (max-width: 700px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .ai-image {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+    
+    .ai-inner {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    input {
+        padding: 12px 15px;
+        font-size: 16px;
+        min-height: 50px;
+    }
+    
+    button#send-btn {
+        padding: 0 25px;
+        font-size: 18px;
+    }
+    
+    .response-box {
+        padding: 20px 15px;
+        min-height: 100px;
+        margin-top: 15px;
+    }
+    
+    #ai-response {
+        font-size: 16px;
+    }
+    
+    .examples {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    
+    .theme-switcher {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+/* Телефоны (портретный режим) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 25px 20px;
+        border-radius: 20px;
+    }
+    
+    .ai-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+    
+    .ai-inner {
+        width: 75px;
+        height: 75px;
+        font-size: 32px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    input {
+        padding: 14px 18px;
+        font-size: 16px;
+        min-height: 55px;
+    }
+    
+    button#send-btn {
+        padding: 0 25px;
+        font-size: 18px;
+    }
+    
+    .response-box {
+        padding: 20px 15px;
+        min-height: 150px;
+    }
+    
+    #ai-response {
+        font-size: 16px;
+    }
+    
+    .examples {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    
+    .theme-switcher {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    input {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .examples {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .example {
+        margin: 3px 0;
+        padding: 2px 5px;
+        display: block;
+    }
+    
+    .ai-image {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .ai-inner {
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
+    }
+}
+
+/* Планшеты в альбомном режиме */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .container {
+        max-width: 85%;
+        padding: 35px;
+    }
+    
+    .ai-image {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .ai-inner {
+        width: 110px;
+        height: 110px;
+        font-size: 45px;
+    }
+    
+    .input-group {
+        max-width: 90%;
+        margin: 0 auto 25px;
+    }
+}
+
+/* Складные устройства */
+@media (max-width: 600px) and (min-height: 700px) {
+    .container {
+        max-height: 80vh;
+    }
+    
+    .response-box {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+/* Адаптация фона для разных ориентаций */
+@media (orientation: portrait) {
+    .background-animation {
+        background-size: 200% 200%;
+    }
+}
+
+@media (orientation: landscape) {
+    .background-animation {
+        background-size: 150% 150%;
+    }
+}
+
+/* Улучшение для сенсорных устройств */
+@media (hover: none) {
+    button#send-btn:hover, .example:hover, .theme-switcher:hover {
+        transform: none !important;
+    }
+    
+    button#send-btn:active, .example:active {
+        transform: scale(0.95) !important;
+    }
+    
+    .theme-switcher:active {
+        transform: rotate(20deg) scale(0.9) !important;
+    }
+}
+
+/* Оптимизация анимаций для мобильных */
+@media (prefers-reduced-motion: reduce) or (max-width: 600px) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .typing-indicator span {
+        animation: none !important;
+        opacity: 0.6;
+    }
+}
+
+/* Адаптивная типографика */
+html {
+    font-size: 100%;
+}
+
+@media (max-width: 900px) {
+    html {
+        font-size: 95%;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 85%;
     }
 }
