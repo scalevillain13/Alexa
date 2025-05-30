@@ -120,6 +120,38 @@ function animateResponse(responseElement, text) {
     }, 20);
 }
 
+function adaptExamplesForMobile() {
+    const examplesContainer = document.querySelector('.examples p');
+    const examples = document.querySelectorAll('.example');
+    
+    if (window.innerWidth < 600) {
+        examplesContainer.innerHTML = 'Попробуйте: ';
+        examples.forEach(example => {
+            const clone = example.cloneNode(true);
+            examplesContainer.appendChild(clone);
+            examplesContainer.appendChild(document.createTextNode(' '));
+        });
+    }
+}
+
+function setupMobileKeyboardBehavior() {
+    const input = document.getElementById('user-input');
+    const container = document.querySelector('.container');
+    
+    input.addEventListener('focus', () => {
+        if (window.innerWidth < 700) {
+            container.style.marginBottom = '100px';
+            container.scrollIntoView({behavior: 'smooth', block: 'center'});
+        }
+    });
+    
+    input.addEventListener('blur', () => {
+        if (window.innerWidth < 700) {
+            container.style.marginBottom = '';
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     
@@ -136,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         responseElement.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
         input.value = '';
+        input.blur();
         
         setTimeout(() => {
             const response = alexaAI(question);
@@ -158,4 +191,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         animateResponse(responseElement, "Здравствуйте. Я Alexa, ваш цифровой помощник. Чем могу помочь?");
     }, 1000);
+    
+    // Адаптация для мобильных устройств
+    adaptExamplesForMobile();
+    setupMobileKeyboardBehavior();
+    window.addEventListener('resize', adaptExamplesForMobile);
+    
+    // Автоматическое изменение высоты input для мобильных
+    input.addEventListener('input', function() {
+        if (window.innerWidth < 600) {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight > 100 ? 100 : this.scrollHeight) + 'px';
+        }
+    });
+    
+    // Оптимизация для сенсорных экранов
+    document.body.addEventListener('touchstart', function() {}, false);
 });
